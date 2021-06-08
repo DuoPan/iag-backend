@@ -7,8 +7,11 @@ const port = 8000;
 app.use(cors());
 app.use(express.json());
 
+// store all hint/answer pairs
 let correctAnswerObj = {};
 
+// generate new password is the hint is not exist
+// return the hint to the front end
 const generatePassword = () => {
   const charList = [0,1,2,3,4,5,6,7,8,9];
   let password = _.shuffle(charList).slice(0,8);
@@ -21,6 +24,7 @@ const generatePassword = () => {
   return hint;
 };
 
+// verify the password, return values such as the highlight values.
 const verifyPassword = (hint, answer) => {
   let correctAnswer = correctAnswerObj[hint]
   let highlight = [];
